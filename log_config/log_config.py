@@ -9,6 +9,7 @@ just call init_log_config before your use the module of logging that build-in py
 
 
 import os
+import sys
 import logging
 from datetime import datetime
 from logging import handlers
@@ -41,10 +42,10 @@ LOG_CONSOLE_LEVEL = logging.DEBUG
 LOG_MAIL_LEVEL = logging.ERROR
 
 
-def init_log_config(base_dir="", file_name_prefix="debug", file_size_limit=10*1024*1024, backup_count=10, use_mail=False):
+def init_log_config(log_dir="", file_name_prefix="debug", file_size_limit=10*1024*1024, backup_count=10, use_mail=False):
     '''
     Do basic configuration for the logging system. support ConsoleHandler, RotatingFileHandler and SMTPHandler
-    :param base_dir: the dir
+    :param log_dir: the dir where to save log files, default "{current_path}/logs"
     :param file_name_prefix: log file name prefix, default "debug"
     :param file_size_limit: log file size limit, default 10M
     :param backup_count: log file count, default 10
@@ -58,9 +59,14 @@ def init_log_config(base_dir="", file_name_prefix="debug", file_size_limit=10*10
                             datefmt=DATE_FORMAT)
 
         # log file directory
-        if not base_dir:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-        log_file_path = os.path.join(base_dir, "{}_{}.log".format(file_name_prefix, datetime.now().strftime("%Y-%m-%d_%H-%M-%S")))
+        if not log_dir:
+            log_dir = os.path.join(sys.path[0], "logs")
+            # log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+        if not os.path.isdir(log_dir):
+            os.mkdir(log_dir)
+
+        # default log file name like: debug_2018-08-27_15-40-52.log
+        log_file_path = os.path.join(log_dir, "{}_{}.log".format(file_name_prefix, datetime.now().strftime("%Y-%m-%d_%H-%M-%S")))
 
         # add rotating file handler
         rf_handler = handlers.RotatingFileHandler(log_file_path, maxBytes=file_size_limit, backupCount=backup_count)
