@@ -9,10 +9,11 @@ logger = logging.getLogger(__name__)
 
 
 def produce_log():
-    init_log_config()
+    init_log_config(file_prefix="project_name")
     logger.debug("this is a message of debug level.")
     logger.info("this is a message of info level.")
-    logger.error("this is a message of error level")
+    logger.warning("this is a message of info level.")
+    logger.error("this is a message of error level.")
 
 
 produce_log()
