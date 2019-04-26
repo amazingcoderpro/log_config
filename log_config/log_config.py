@@ -15,8 +15,7 @@ from datetime import datetime
 from logging import handlers
 
 # formatter
-FORMATTER = "%(asctime)s %(filename)s[line:%(lineno)d] " \
-            "[%(module)s:%(funcName)s] [%(threadName)s:%(thread)d] " \
+FORMATTER = "%(asctime)s [%(threadName)s] [%(filename)s:%(funcName)s:%(lineno)d] " \
             "%(levelname)s %(message)s"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
