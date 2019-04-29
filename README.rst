@@ -14,6 +14,9 @@ Meta
 * Email: wcadaydayup@163.com
 * Status: active development, stable, maintained
 
+[![Version](https://img.shields.io/pypi/v/log_config.svg)](https://pypi.python.org/pypi/log_config)
+[![GitHub](https://github.com/wcadaydayup/log_config.svg?branch=master)](https://github.com/wcadaydayup/log_config)
+
 
 Installation
 ------------
@@ -23,7 +26,7 @@ Simply run the following from within a virtualenv::
 	
 	or
 
-    $ pip install git+https://github.com/wcadaydayup/log_config
+        $ pip install git+https://github.com/wcadaydayup/log_config
 
 
 Usage

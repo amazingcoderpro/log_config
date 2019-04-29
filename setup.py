@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='log_config',
-    version="1.4",
+    version="1.7",
     description=(
         "Provide a function for anyone who want to configure log parameters easily, just call init_log_config when your app start up, the you can use the module of logging which build-in python3 without any other configtur. This module support ConsoleHandler, RotatingFileHandler and SMTPHandler and You can change the configuration parameters according to your requirements."
     ),
@@ -21,7 +21,7 @@ setup(
     platforms=["all"],
     url='https://github.com/wcadaydayup/log_config/',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
