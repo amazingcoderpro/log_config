@@ -17,11 +17,11 @@ from logging import handlers
 # formatter
 FORMATTER = "%(asctime)s [%(threadName)s] [%(filename)s:%(funcName)s:%(lineno)d] " \
             "%(levelname)s %(message)s"
-DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+DATE_FORMAT = "%Y%m%d_%H%M%S"
 
 # log file args
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_FILE_NAME = "debug_{}.log".format(datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))       # your_log_file_name.log
+LOG_FILE_NAME = "debug_{}.log".format(datetime.now().strftime("%Y%m%d_%H%M%S"))       # your_log_file_name.log
 LOG_FILE_PATH = os.path.join(BASE_DIR, LOG_FILE_NAME)   # your log full path
 LOG_FILE_SIZE = 10 * 1024 * 1024                        # the limit of log file size
 LOG_BACKUP_COUNT = 5                                    # backup counts
@@ -42,7 +42,7 @@ LOG_MAIL_LEVEL = logging.ERROR
 
 def init_log_config(log_dir="", file_prefix="debug", file_size_limit=10 * 1024 * 1024, backup_count=10,
                     use_mail=False, console_level=LOG_CONSOLE_LEVEL,
-                    file_level=LOG_FILE_LEVEL, mail_level=LOG_MAIL_LEVEL, everyday=True):
+                    file_level=LOG_FILE_LEVEL, mail_level=LOG_MAIL_LEVEL, when="D", interval=1):
     '''
     Do basic configuration for the logging system. support ConsoleHandler, RotatingFileHandler and SMTPHandler
     :param log_dir: the dir where to save log files, default "{current_path}/logs"
@@ -53,6 +53,8 @@ def init_log_config(log_dir="", file_prefix="debug", file_size_limit=10 * 1024 *
     :param console_level: the level of output log in console, default logging.DEBUG
     :param file_level: the level of log file, default logging.INFO
     :param mail_level: the level of log mail, default logging.ERROR
+    :param when: rotating the log file at certain timed intervals. 'D'-days, 'H'-hours, 'M'-minutes
+    :param interval: rotating the log file at certain timed intervals.
     :return: None
     '''
 
@@ -69,12 +71,12 @@ def init_log_config(log_dir="", file_prefix="debug", file_size_limit=10 * 1024 *
             os.mkdir(log_dir)
 
         # default log file name like: debug_2018-08-27_15-40-52.log
-        log_file_path = os.path.join(log_dir, "{}_{}.log".format(file_prefix, datetime.now().strftime("%Y-%m-%d_%H-%M-%S")))
+        log_file_path = os.path.join(log_dir, "{}_{}.log".format(file_prefix, datetime.now().strftime("%Y%m%d_%H%M%S")))
 
         # add rotating file handler
         # rf_handler = handlers.RotatingFileHandler(log_file_path, maxBytes=file_size_limit, backupCount=backup_count, encoding="utf-8")
-        if everyday:
-            rf_handler = handlers.TimedRotatingFileHandler(log_file_path, when="D", backupCount=backup_count, interval=1, encoding="utf-8")
+        if when:
+            rf_handler = handlers.TimedRotatingFileHandler(log_file_path, when=when, backupCount=backup_count, interval=interval, encoding="utf-8")
         else:
             rf_handler = handlers.RotatingFileHandler(log_file_path, maxBytes=file_size_limit, backupCount=backup_count,
                                                       encoding="utf-8")
