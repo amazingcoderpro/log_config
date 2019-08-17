@@ -40,9 +40,9 @@ LOG_FILE_LEVEL = logging.INFO
 LOG_MAIL_LEVEL = logging.ERROR
 
 
-def init_log_config(log_dir="", file_prefix="debug", file_size_limit=10 * 1024 * 1024, backup_count=10,
+def init_log_config(log_dir="", file_prefix="debug", file_size_limit=20 * 1024 * 1024, backup_count=30,
                     use_mail=False, console_level=LOG_CONSOLE_LEVEL,
-                    file_level=LOG_FILE_LEVEL, mail_level=LOG_MAIL_LEVEL, when="D", interval=1):
+                    file_level=LOG_FILE_LEVEL, mail_level=LOG_MAIL_LEVEL, when="midnight", interval=1, crated_time_in_file_name=True):
     '''
     Do basic configuration for the logging system. support ConsoleHandler, RotatingFileHandler and SMTPHandler
     :param log_dir: the dir where to save log files, default "{current_path}/logs"
@@ -71,15 +71,17 @@ def init_log_config(log_dir="", file_prefix="debug", file_size_limit=10 * 1024 *
             os.mkdir(log_dir)
 
         # default log file name like: debug_2018-08-27_15-40-52.log
-        log_file_path = os.path.join(log_dir, "{}_{}.log".format(file_prefix, datetime.now().strftime("%Y%m%d_%H%M%S")))
+        if crated_time_in_file_name:
+            log_file_path = os.path.join(log_dir, "{}_{}.log".format(file_prefix, datetime.now().strftime("%Y%m%d_%H%M%S")))
+        else:
+            log_file_path = os.path.join(log_dir, "{}.log".format(file_prefix))
 
         # add rotating file handler
         # rf_handler = handlers.RotatingFileHandler(log_file_path, maxBytes=file_size_limit, backupCount=backup_count, encoding="utf-8")
         if when:
             rf_handler = handlers.TimedRotatingFileHandler(log_file_path, when=when, backupCount=backup_count, interval=interval, encoding="utf-8")
         else:
-            rf_handler = handlers.RotatingFileHandler(log_file_path, maxBytes=file_size_limit, backupCount=backup_count,
-                                                      encoding="utf-8")
+            rf_handler = handlers.RotatingFileHandler(log_file_path, maxBytes=file_size_limit, backupCount=backup_count, encoding="utf-8")
 
         rf_handler.setLevel(file_level)
         formatter = logging.Formatter(FORMATTER)
