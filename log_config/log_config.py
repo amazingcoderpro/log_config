@@ -42,7 +42,8 @@ LOG_MAIL_LEVEL = logging.ERROR
 
 def init_log_config(log_dir="", file_prefix="debug", file_size_limit=20 * 1024 * 1024, backup_count=30,
                     use_mail=False, console_level=LOG_CONSOLE_LEVEL,
-                    file_level=LOG_FILE_LEVEL, mail_level=LOG_MAIL_LEVEL, when="midnight", interval=1, crated_time_in_file_name=True):
+                    file_level=LOG_FILE_LEVEL, mail_level=LOG_MAIL_LEVEL, when="midnight", interval=1,
+                    crated_time_in_file_name=False):
     '''
     Do basic configuration for the logging system. support ConsoleHandler, RotatingFileHandler and SMTPHandler
     :param log_dir: the dir where to save log files, default "{current_path}/logs"
