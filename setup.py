@@ -9,7 +9,7 @@ setup(
     name='log_config',
     version="2.1.0",
     description=(
-        "Provide a function for anyone who want to configure log parameters easily, just call init_log_config when your app start up, the you can use the module of logging which build-in python3 without any other configtur. This module support ConsoleHandler, RotatingFileHandler and SMTPHandler and You can change the configuration parameters according to your requirements."
+        "Provide a function for anyone who want to configure log parameters easily, just call init_log_config when your app start up, the you can use the module of logging which build-in python3 without any other configture. This module support TimeRotatingHandler, MultiProcessTimeRotatingHandler, RotatingFileHandler and SMTPHandler and You can change the configuration parameters according to your requirements."
     ),
     long_description=open('README.rst').read(),
     author='Wu Charles',
@@ -19,7 +19,7 @@ setup(
     license='BSD License',
     packages=find_packages(),
     platforms=["all"],
-    url='https://github.com/wcadaydayup/log_config/',
+    url='https://github.com/amazingcoderpro/log_config/',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Operating System :: OS Independent',
