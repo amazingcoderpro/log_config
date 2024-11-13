@@ -26,7 +26,7 @@ Simply run the following from within a virtualenv::
 	
 	or
 
-        $ pip install git+https://github.com/wcadaydayup/log_config
+    $ pip install git+https://github.com/wcadaydayup/log_config
 
 
 Usage
