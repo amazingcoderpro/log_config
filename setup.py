@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='log_config',
-    version="2.1.0",
+    version="2.1.1",
     description=(
         "Provide a function for anyone who want to configure log parameters easily, just call init_log_config when your app start up, the you can use the module of logging which build-in python3 without any other configture. This module support TimeRotatingHandler, MultiProcessTimeRotatingHandler, RotatingFileHandler and SMTPHandler and You can change the configuration parameters according to your requirements."
     ),
